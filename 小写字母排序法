@@ -1,0 +1,18 @@
+//请注意，这种方法对于所有数量庞大，但是内容的不同种类固定的数列排序能起到非常快的作用。
+//这帮人太聪明了
+
+string strSort(string str)
+    {
+        int count[26]={0};
+        int n=str.length();
+        for(char c:str)
+        {
+            count[c-'a']++;
+        }
+        string rindex(n,'a');
+        int p=0;
+        for(int j=0;j<26;j++)
+            for(int i=0;i<count[j];i++)
+                rindex[p++]+=j;
+        return rindex;
+    }
