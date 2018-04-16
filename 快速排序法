@@ -1,0 +1,27 @@
+template <class T>class mysort {
+public:
+	static void Qsort(T A[], int size)
+	{
+		qsort(A, 0, size);
+	}
+	static void qsort(T A[], int begin, int end)
+	{
+		if (begin >= end)return;
+		int key = A[begin];
+		int i = begin;
+		int j = end - 1;
+		while (j > i)
+		{
+			while (j > i&&A[j] >= key)
+				j--;
+			A[i] = A[j];
+			while (j > i&&A[i] <= key)
+				i++;
+			A[j] = A[i];
+
+		}
+		A[i] = key;
+		qsort(A, begin, i);//请注意这里默认就是end要较最大下标加1，现在algorith没有问题了
+		qsort(A, i + 1, end);
+	}
+};
