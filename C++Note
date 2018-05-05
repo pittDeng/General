@@ -1,1 +1,3 @@
 sort()函数有三个参数，后面是排序依据，如果是升序,则定义 bool function(int x,int y){return x<y;},以此可以知道降序是怎么排列
+
+if（）对于非零的数值都是当作true;对于0的数值当作false,无论时int还是double
