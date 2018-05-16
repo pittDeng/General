@@ -20,3 +20,10 @@ C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build
 
 
 （7）在C#调用C++的程序中，字符串string类型不能通用，还需要继续学习
+
+
+（8）C++调用c++的dll时，不能使用公共语言支持，那样加载不会成功,但是C#一定要加公共语言支持
+HINSTANCE hInst;
+	hInst = LoadLibrary(L"mDll_pso.dll");
+	typedef double(*SUBPROC)(int,int,int,bool,string);
+            SUBPROC func=(SUBPROC)GetProcAdress(hInst,'function_name'
