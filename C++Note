@@ -1,14 +1,14 @@
-sort()函数有三个参数，后面是排序依据，如果是升序,则定义 bool function(int x,int y){return x<y;},以此可以知道降序是怎么排列
+（1）sort()函数有三个参数，后面是排序依据，如果是升序,则定义 bool function(int x,int y){return x<y;},以此可以知道降序是怎么排列
 
-if（）对于非零的数值都是当作true;对于0的数值当作false,无论时int还是double
+（2）if（）对于非零的数值都是当作true;对于0的数值当作false,无论时int还是double
 
-定义类函数指针非常麻烦，尽量避免类成员函数指针
+（3）定义类函数指针非常麻烦，尽量避免类成员函数指针
 
-在通常定义构造函数时，最好不要将函数设为引用，因为通常会有常值
+（4）在通常定义构造函数时，最好不要将函数设为引用，因为通常会有常值
 
-在产生随机数时，一定要将srand((int)time(NULL))放在循环外面，此外这个要包含ctime和cstdlib包
+（5）在产生随机数时，一定要将srand((int)time(NULL))放在循环外面，此外这个要包含ctime和cstdlib包
 
-在导出dll时，如果是给C#用，应该修改项目为通用语言，某则无法应用，此外，为了代码简单，可以给项目加一个.def文件
+（6）在导出dll时，如果是给C#用，应该修改项目为通用语言，某则无法应用，此外，为了代码简单，可以给项目加一个.def文件
 定义如下 LIBRARY name
             EXPORTS
                 func1
@@ -17,3 +17,6 @@ if（）对于非零的数值都是当作true;对于0的数值当作false,无论
 C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvar32.bat工具
 在命令行中输入 cd C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\
 然后输入dumpbin然后 cd到相应的dll的文件夹，再使用dumpbin -exports name.dll 可以查看dll文件中的函数
+
+
+（7）在C#调用C++的程序中，字符串string类型不能通用，还需要继续学习
