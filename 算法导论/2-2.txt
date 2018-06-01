@@ -1,0 +1,13 @@
+//2.2-2
+for i=1 to n-1
+    min=A[i]
+    index=i
+    for j=i+1 to n
+        if A[j]<min
+            min=A[j]
+            index=j
+    A[index]=A[i]
+    A[i]=min
+
+//此题的最好情况和最坏情况的时间复杂度都是O(n^2)
+
