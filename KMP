@@ -1,0 +1,64 @@
+// ConsoleApplication8.cpp : 定义控制台应用程序的入口点。
+// ReversePolish.cpp : 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<stack>
+#include<iostream>
+#include<string>
+using namespace std;
+void get_Next(string uncheck, int next[])
+{
+	int i = 1;
+	int j = 0;
+	next[0] = -1;
+	next[1] = 0;
+	while (i < uncheck.length() - 1)
+	{
+		if (j == -1 || uncheck[j] == uncheck[i])
+		{
+			++i;
+			++j;
+			if (uncheck[i] == uncheck[j])
+			{
+				next[i] = next[j];//如果相同，就
+			}
+			else
+				next[i] = j;
+		}
+		else
+			j = next[j];
+	}
+}
+int getIndex(string uncheck, string all,int next[])
+{
+	int i = 0;
+	int j = 0;
+	while (i!=all.length()&&j!=uncheck.length())
+	{
+		if(j==-1|| all[i] ==uncheck[j])
+		{
+			i++;
+			j++;
+		}
+		else
+			j = next[j];
+	}
+	if (j == uncheck.length())
+		return i - j;
+	return -1;
+}
+int main()
+{
+	string uncheck = "aaaaabcde";
+	string all = "stdsabcabx";
+	int *next = new int[uncheck.length()];
+	get_Next(uncheck, next);
+	for (int i = 0; i < uncheck.length(); ++i)
+		cout << next[i] << " ";
+	cout << endl;
+	cout << getIndex(uncheck, all, next)<<endl;
+	system("pause");
+}
+
+
