@@ -82,6 +82,7 @@ git删除文件
         $git checkout -b branchname//创建并且切换到某个分支
         $git merge branchname //将branchname更新到当前分支
         $git branch -d branchname //删除某个分支
+        $git push origin --delete [branchname]//删除某远程分支
         //如果原有基础的分支和新的分支都发生了变化，新的分支就不能融合上基础分支，也就发生了分支冲突，可以修改当前文件
         //再融合
         $git log --graph --pretty=oneline --abbrev-commit //这个命令可以看分支图
