@@ -1,0 +1,97 @@
+
+
+/*
+1 git的密钥放的位置不要改变，因为这样会发生我无法解决的问题，无法连接上对应的位置
+2 VS CODE的git的提交功能只能提交到本地，提交到远程仓库需要用git bash
+3 github上删除一个仓库，可以进了仓库之后，再在setting中最下方删除
+*/
+
+
+
+The first Day
+git 命令：
+        git config --global user.name "name"
+        git config --global user.email "emailAddress"
+        git init 通过git init 来使当前目录能够由git管理，示例代码如下
+$mkdir learninggit
+$cd learninggit
+$pwd//这里是查看当前目录
+$git init//这样就创建了这个目录
+git 添加命令
+        $git add firstDocument.txt//请注意文件名可以写引号，也可以不写引号。
+        $git commit -m "description"
+        $git add firstDocument.txt secondDocument.txt
+        $git commit -m "secondDescription"
+        $git add .
+        //这条命令可以添加所有的
+git查看不同的命令
+        $git diff//请注意这个diff是 是只当前工作区和暂存区的差别，
+        //如果没有add，那么就没有差别
+        $git diff --cached//这个命令是暂存区与branch之间的差别
+        $git diff --staged//这个命令暂时和$git diff --staged一样
+git查看当前状态的命令
+        $git status //这个命令可以看到当前文件夹中，没有被add进来的
+        //文件和已经修改的文件
+git查看版本信息的命令
+        $git log
+git回退到之前的版本命令
+        $git reset --hard HEAD^//此为回退到上一版本的命令，如果要回退
+        //到上二个版本，用下面这条命令
+        $git reset --hard HEAD^^//如果要回退到上一百个版本，那么可以用如下
+        //命令
+        $git reset -- hard HEAD~100
+        //如果已经回退到上一个版本，但是后悔了，这时可以用commit id来从新到另一个版本
+        $git reset --hard  commitId
+        //如果已经不知道上一个版本的commitId，这时可以使用下一条命令来看之前的命令行
+        $git reflog//这条命令就算关掉了git bash也可以使用
+git查看当前文件
+        $cat firstDocument//
+
+git撤销更改
+        $git checkout -- firstDocument.txt  //请注意--两端必须要有空格
+        //这个可以撤回到暂存区的，也就是说如果没有add，那么就撤销到版本库的最新的状态。
+        $git reset HEAD firstDocument.txt //这里将add到暂存区的修改撤销，但是这时工作区没有变，还要加一个
+        $git checkout --  firstDocument.txt才可以恢复到原来的版本。
+git删除文件
+        $git rm firstDocument.txt //这是git中删除文件，同时也再工作区中删除文件,暂存区删除了。
+        $rm firstDocument.txt //这是普通删除文件的命令，在git的branch中不删除文件
+        //不小心误删了文件，并且是在git中，无论有没有commit，均要$git reset HEAD^,然后$git checkout -- firstDocument.txt
+        
+连接远程git仓库(github)
+        $ ssh-keygen -t rsa -C "yourEmail@example.com"
+        获取公钥.pub，然后再github中的setting/SSH and GPG keys中添加SSH公钥
+        $git remote add origin git@github.com:pittDeng/testgit.git
+        //上面那条命令，就是将当前文件夹与github文件夹相关联。
+        $git pull origin master
+        //再第一次push之前，可以将使用这条命令
+        $git push -u origin master -f
+        //如果第一此Push出错，可以使用这条命令
+        $git push -u origin master
+        //第一次push用这条命令
+        $git push origin master
+        //第二次及以后使用push命令
+从远程clone仓库
+        $git clone git@github.com:pittDeng/testgit.git
+        //如果是http协议，每一次push都要输入用户名和密码
+        $git clone https://github.com/pittDeng/testgit.git
+        //如果是git协议，那么clone之后可以直接push,非常方便
+分支操作
+        $git branch//查看所有分支
+        $git branch [branchname]//创建新的分支
+        $git checkout branchname//切换到某个分支
+        $git checkout -b branchname//创建并且切换到某个分支
+        $git merge branchname //将branchname更新到当前分支
+        $git branch -d branchname //删除某个分支
+        //如果原有基础的分支和新的分支都发生了变化，新的分支就不能融合上基础分支，也就发生了分支冲突，可以修改当前文件
+        //再融合
+        $git log --graph --pretty=oneline --abbrev-commit //这个命令可以看分支图
+        $git merge --no-ff -m "merge with no-ff" dev //不使用FastForward来进行融合，这样当删除分支后，还是可以
+        //通过$git log --graph --pretty=oneline --abbrev-commit查看分支图，原有记录不会消失
+
+将本地按照远程库更新
+        $git fetch origin master 将远程主机上的master分支获得
+        $git merge origin/master 融合到远程主机上的master分支
+        //上面两条命令与下面这条命令是一样的
+        $git pull //获取远程分支并且自动合并，网址：https://www.yiibai.com/git/git_pull.html 可以找到
+        $git pull orgin master:master
+        $git pull orign master //与当前分支合并
