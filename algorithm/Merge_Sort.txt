@@ -1,0 +1,65 @@
+//进行归并排序
+// ConsoleApplication4.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include<iostream>
+#define MaxSize 7 //在main函数中顶一个数组的元素个数来做测试
+using namespace std;
+template<typename T>
+void merge_sort(T arr[], int lower, int upper)
+{
+	if (lower < upper)//先将数组分为两半，分别
+	{
+		int mid = (lower + upper) / 2;
+		merge_sort(arr, lower, mid);//先排序左半部分
+		merge_sort(arr, mid + 1, upper);//再排序右半部分
+		merge(arr, lower, mid, upper);//将两边归并
+	}
+}
+template<typename T>
+void merge(T arr[], int lower, int mid,int upper)
+{
+	int leftnum = mid - lower + 1;
+	int rightnum = upper - mid;
+    //下面将数组的左半部分和右半部分别赋给两个数组
+	T *left = new T[leftnum];
+	T *right = new T[rightnum];
+	for (int i = 0; i < leftnum; ++i)
+		left[i] = arr[lower + i];
+	for (int i = 0; i < rightnum;++i)
+		right[i] = arr[mid +i+1];
+	int i = 0;
+	int j = 0;
+    //两个数组的归并的核心排序算法
+	for(int k=0;k < leftnum + rightnum;++k)
+	{
+		if (i == leftnum)
+		{
+			while (k < leftnum + rightnum)arr[lower+k++] = right[j++];
+		}
+		else if (j == rightnum)
+		{
+			while (k < leftnum + rightnum)arr[lower+k++] = left[i++];
+		}
+		else if (left[i] < right[j])
+			arr[lower+k] = left[i++];
+		else
+			arr[lower+k] = right[j++];
+
+	}
+}
+int main()
+{
+	int nums1[MaxSize] = { 0,1,9,2,3,2,1 };
+	merge_sort(nums1, 0, MaxSize-1);
+    //输出已经排序后的算法
+	for (int i = 0; i < MaxSize; ++i)
+	{
+		cout << nums1[i] << " ";
+	}
+	cout << endl;
+	system("pause");
+    return 0;
+}
+
